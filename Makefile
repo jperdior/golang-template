@@ -30,18 +30,18 @@ tests: ### Run tests
 start: check_initialize build run ### Start the application
 
 check_initialize:
-	@if [ ! -f .initialize ]; then \
-		echo ".initialize file not found. Running initialize..."; \
+	@if [ ! -f .initialized ]; then \
+		echo "Project not initialized. Running initialize..."; \
 		$(MAKE) initialize; \
-		touch .initialize; \
+		touch .initialized; \
 	else \
-		$(MAKE) start; \
+		echo "Project already initialized"; \
 	fi
 
 restart : stop start ### Restart the application
 
 initialize:
-	./ops/scripts/initialize.sh
+	@./ops/scripts/initialize.sh
 
 build:
 	@${DOCKER_COMPOSE} build

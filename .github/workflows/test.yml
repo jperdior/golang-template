@@ -20,10 +20,6 @@ jobs:
         with:
           go-version: '1.23.x'
 
-      - name: Display Go version
-        run: go version
-      - name: List files
-        run: ls -la
       - name: Build
         run: go build ./cmd/api
       - name: Test with the Go CLI

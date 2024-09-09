@@ -1,5 +1,7 @@
 # Boilerplate for a DDD module in Golang
 
+![test workflow](https://github.com/jperdior/golang-template/actions/workflows/test.yml/badge.svg)
+
 This is a boilerplate for a Domain-Driven Design module in Golang using gin-gonic.
 
 ## Requirements

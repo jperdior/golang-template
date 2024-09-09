@@ -2,7 +2,7 @@
 
 ![test workflow](https://github.com/jperdior/golang-template/actions/workflows/test.yml/badge.svg)
 
-This is a boilerplate for a Domain-Driven Design module in Golang using gin-gonic.
+This is a boilerplate for a Domain-Driven Design module in Golang using gin-gonic. It also includes a connection to a mariadb database.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ This is a boilerplate for a Domain-Driven Design module in Golang using gin-goni
 - Docker
 - Docker Compose
 - Make
-- Available ports 9091
+- Available ports 9091 and 3306
 
 ## Running the project
 

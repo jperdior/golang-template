@@ -27,7 +27,16 @@ endif
 tests: ### Run tests
 	go test -v ./...
 
-start: initialize build run ### Start the application
+start: check_initialize build run ### Start the application
+
+check_initialize:
+	@if [ ! -f .initialize ]; then \
+		echo ".initialize file not found. Running initialize..."; \
+		$(MAKE) initialize; \
+		touch .initialize; \
+	else \
+		$(MAKE) start; \
+	fi
 
 restart : stop start ### Restart the application
 

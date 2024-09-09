@@ -1,7 +1,7 @@
 version: "3.6"
 
 services:
-    golang-template:
+    api:
       build:
         context: ../..
         dockerfile: ops/docker/Dockerfile.local

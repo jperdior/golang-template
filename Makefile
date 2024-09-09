@@ -5,6 +5,9 @@
 # Variables
 # UNAME		:= $(shell uname -s)
 PWD = $(shell pwd)
+PROJECT_NAME = golang-template
+API := api
+DOCKER_COMPOSE=docker-compose -p ${PROJECT_NAME} -f ${PWD}/ops/docker/docker-compose.yml
 
 .EXPORT_ALL_VARIABLES:
 
@@ -21,27 +24,27 @@ else
 		$(MAKEFILE_LIST) | grep -v '@awk' | sort
 endif
 
-tests:
+tests: ### Run tests
 	go test -v ./...
 
-start: initialize build run
+start: initialize build run ### Start the application
 
-restart : stop start
+restart : stop start ### Restart the application
 
 initialize:
 	./ops/scripts/initialize.sh
 
 build:
-	docker-compose -f ops/docker/docker-compose.yml build
+	@${DOCKER_COMPOSE} build
 
 run:
-	docker-compose -f ops/docker/docker-compose.yml up -d
+	@${DOCKER_COMPOSE} up -d
 
-stop:
-	docker-compose -f ops/docker/docker-compose.yml down
+stop: ### Stop the docker containers
+	@${DOCKER_COMPOSE} down --remove-orphans
 
 analysis: ### Run static analysis and linter
 	docker run --rm -v $(PWD):/app -w /app golangci/golangci-lint:latest golangci-lint run
 
-openapi-init:
+openapi-init: ### Generate openapi docs
 	swag init -g cmd/api/main.go -g internal/platform/server/routes.go -o docs

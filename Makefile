@@ -8,6 +8,8 @@ PWD = $(shell pwd)
 PROJECT_NAME = golang-template
 API := api
 DOCKER_COMPOSE=docker-compose -p ${PROJECT_NAME} -f ${PWD}/ops/docker/docker-compose.yml
+GREEN=\033[0;32m
+RESET=\033[0m
 
 .EXPORT_ALL_VARIABLES:
 
@@ -33,9 +35,10 @@ check_initialize:
 	@if [ ! -f .initialized ]; then \
 		echo "Project not initialized. Running initialize..."; \
 		$(MAKE) initialize; \
-		touch .initialized; \
+		echo -e "$(GREEN)Project initialized successfully. Please run make start again after initialization.$(RESET)"; \
+		exit 1; \
 	else \
-		echo "Project already initialized"; \
+		echo "$(GREEN)Project already initialized$(RESET)"; \
 	fi
 
 restart : stop start ### Restart the application

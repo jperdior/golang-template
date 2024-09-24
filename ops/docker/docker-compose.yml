@@ -6,7 +6,20 @@ services:
       ports:
       - "9091:9091"
       environment:
-      - PORT=9091
+        - PORT=9091
+        - JWTSECRET=verysecret
+        - JWTEXPIRATION=720
+        - PORT=9091
+        - DATABASEHOST=database
+        - DATABASEUSER=root
+        - DATABASEPASSWORD=root
+        - DATABASENAME=name
+        - DATABASEPORT=3306
+        - DATABASEDRIVER=mysql
+        - MAILERHOST=somesmtp.com
+        - MAILERPORT=587
+        - MAILERUSER=from@email.com
+        - MAILERPASSWORD=somepass
       healthcheck:
           test: ["CMD", "curl", "-f", "http://localhost:9091/status"]
           interval: 1s

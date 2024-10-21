@@ -60,3 +60,10 @@ analysis: ### Run static analysis and linter
 
 openapi-init: ### Generate openapi docs
 	swag init -g cmd/api/main.go -g internal/platform/server/routes.go -o docs
+
+refresh-openapi: ### Generate openapi docs
+	docker run --rm -v $(PWD):/code ghcr.io/swaggo/swag:latest init -g cmd/api/main.go -g internal/platform/server/routes.go -o docs
+
+generate-mocks: ### Generate mocks
+	docker run -v "$PWD":/src -w /src vektra/mockery --all
+
